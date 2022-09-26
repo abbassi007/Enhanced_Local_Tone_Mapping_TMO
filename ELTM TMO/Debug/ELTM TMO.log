@@ -1,0 +1,2 @@
+﻿main.obj : error LNK2019: unresolved external symbol "void __cdecl eltm_tmo(struct _iobuf *,int,int,int,int,unsigned char *,double,bool,bool)" (?eltm_tmo@@YAXPAU_iobuf@@HHHHPAEN_N2@Z) referenced in function _main
+C:\Users\shahi\Desktop\Projects\ELTM TMO\ELTM TMO\Debug\ELTM TMO.exe : fatal error LNK1120: 1 unresolved externals
