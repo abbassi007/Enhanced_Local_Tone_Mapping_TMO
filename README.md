@@ -10,7 +10,7 @@ This repository contains the implimentation of Enhanced Local Tone Mapping (ELTM
 
 ### 2. Paper Link
 
-Link: [Paper Link](https://www.sciencedirect.com/science/article/pii/S1047320318300555) 
+- [ELSEVIER](https://www.sciencedirect.com/science/article/pii/S1047320318300555)
 
 ### 3. Supporting HDR Image
 
