@@ -32,7 +32,3 @@ Follow the steps below to run the code.
 ## Contact
 
 It would be my pleasure to guide and assist you. If you have any questions feel free to contact me at shahidabbassi002 [at][gmail][.com].
-
-## License
-
-[MIT License](LICENSE)
