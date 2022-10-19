@@ -29,10 +29,6 @@ Follow the steps below to run the code.
 
 ![App Screenshot](https://github.com/abbassi007/Enhanced_Local_Tone_Mapping_TMO/blob/master/pngs/example.png)
 
-## License
-
-[MIT License](LICENSE)
-
 ## Contact
 
-It would be my pleasure to guide and assist you. If you have any questions feel free to contact me at shahidabbassi002 [at][gmail][dot][com].git
+It would be my pleasure to guide and assist you. If you have any questions feel free to contact me at shahidabbassi002 [at][gmail][dot][com]
