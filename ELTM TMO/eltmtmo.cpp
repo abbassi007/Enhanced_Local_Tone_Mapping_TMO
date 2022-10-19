@@ -129,12 +129,16 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 		gl = (gl < 0) ? 0 : gl;
 		bl = (bl < 0) ? 0 : bl;
 
+		cout<<rl<<": " << gl <<": " << bl<< ": " << endl;
+
 		*image_buffer_temp = (MEMORY)rl;
 		image_buffer_temp++;
 		*image_buffer_temp = (MEMORY)gl;
 		image_buffer_temp++;
 		*image_buffer_temp = (MEMORY)bl;
 		image_buffer_temp++;
+
+		
 
 	}
 	//Delete Ylog

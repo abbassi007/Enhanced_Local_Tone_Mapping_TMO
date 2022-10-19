@@ -1,2 +1,7 @@
-﻿  main.cpp
+﻿  eltmtmo.cpp
+C:\Users\shahi\Desktop\Projects\ELTM TMO\ELTM TMO\ELTM TMO\eltmtmo.cpp(119,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\shahi\Desktop\Projects\ELTM TMO\ELTM TMO\ELTM TMO\eltmtmo.cpp(120,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\shahi\Desktop\Projects\ELTM TMO\ELTM TMO\ELTM TMO\eltmtmo.cpp(121,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\shahi\Desktop\Projects\ELTM TMO\ELTM TMO\ELTM TMO\eltmtmo.cpp(26,27): warning C4101: 'BPlog_': unreferenced local variable
+C:\Users\shahi\Desktop\Projects\ELTM TMO\ELTM TMO\ELTM TMO\eltmtmo.cpp(35,12): warning C4101: 'i': unreferenced local variable
   ELTM TMO.vcxproj -> C:\Users\shahi\Desktop\Projects\ELTM TMO\ELTM TMO\x64\Debug\ELTM TMO.exe
