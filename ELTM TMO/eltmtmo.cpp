@@ -91,8 +91,8 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 		
 		//Function (6)
 		SG = (-0.4 * BPlog.at(x) > 1) ? (-0.4 * BPlog.at(x)) : 1;
-		DPFlog_ = etaF * SG * DPFlog.at(x); //DP'Flog
-		DPClog_ = etaC * SG * DPClog.at(x); //DP'Clog
+		DPFlog_ = etaF * SG * DPFlog.at(x); 
+		DPClog_ = etaC * SG * DPClog.at(x); 
 		//Function (7)
 		BP = exp2(BPlog.at(x));
 		DP = exp2(DPFlog_ + DPClog_);
