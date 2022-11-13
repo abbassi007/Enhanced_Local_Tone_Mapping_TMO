@@ -1,0 +1,10 @@
+name: eltm_tmo
+dependencies:
+  - python==3.9
+  - pip
+  - pip:
+    - PyQt6
+    - imageio
+    - rawpy
+    - numpy
+    - opencv-python

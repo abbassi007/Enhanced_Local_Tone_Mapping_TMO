@@ -2,7 +2,9 @@
 
 #pragma warning(disable : 4996)
 
+#ifdef _WIN32
 #include <corecrt_wstdio.h>
+#endif
 #include<stdio.h>
 #include <cstdint>
 #include"type.h"
