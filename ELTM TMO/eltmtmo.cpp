@@ -5,11 +5,10 @@
 #include <algorithm> 
 #include <numeric>
 #include <iostream>
-#include"constant.h"
-
+#include <math.h>
 
 void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer, double gamma,
-	bool flt, bool bigendian)
+	bool flt, bool bigendian, const ELTM_Params& params)
 {
 	auto start = std::chrono::high_resolution_clock::now();
 
@@ -41,19 +40,19 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 
 			/*------------Exact luminance channel------------*/
 			Read_Y_Comp(in, y, count, depth, flt, bigendian, false);
-			Ylog.push_back(log2(y + epsilon));
+			Ylog.push_back(log2(y + params.epsilon));
 		}
 	}
 	//Reset file position of the stream to begining of file;
 	fseek(in, pos, SEEK_SET);
 
 	/*----------------3.2. Decomposition----------------*/
-	DPFlog = Clip(Ylog - edgeAwareFilter(Ylog, w, h, rS, epsilonS), lamdaF);
+	DPFlog = Clip(Ylog - edgeAwareFilter(Ylog, w, h, params.rS, params.epsilonS), params.lamdaF);
 	BPFlog = Ylog - DPFlog;
 	//Delete Ylog
 	vector<double>().swap(Ylog);
 
-	DPClog = Clip(BPFlog - edgeAwareFilter(BPFlog, w, h, rL, epsilonL), lamdaC);
+	DPClog = Clip(BPFlog - edgeAwareFilter(BPFlog, w, h, rL, params.epsilonL), params.lamdaC);
 	BPlog = BPFlog - DPClog;
 	//Delete BPFlog
 	vector<double>().swap(BPFlog);
@@ -63,7 +62,7 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 	minBPlog = *min_element(BPlog.begin(), BPlog.end());
 
 	beta = -maxBPlog;
-	alpha = (double)tauR / (maxBPlog - minBPlog);
+	alpha = (double)params.tauR / (maxBPlog - minBPlog);
 
 	BPlog = (BPlog + beta) * alpha; //BP'log (5)
 
@@ -81,7 +80,7 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 	BPmax = exp2(maxBPlog);
 
 	/*--------------5. ELTM brightness control-------------------*/
-	p_ = p * pow(10, k * (accumulate(BPlog.begin(), BPlog.end(), 0.0) / BPlog.size() - m));
+	p_ = params.p * pow(10, params.k * (accumulate(BPlog.begin(), BPlog.end(), 0.0) / BPlog.size() - params.m));
 
 	//Start computing loop from function (6)
 
@@ -91,14 +90,14 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 		
 		//Function (6)
 		SG = (-0.4 * BPlog.at(x) > 1) ? (-0.4 * BPlog.at(x)) : 1;
-		DPFlog_ = etaF * SG * DPFlog.at(x); 
-		DPClog_ = etaC * SG * DPClog.at(x); 
+		DPFlog_ = params.etaF * SG * DPFlog.at(x); 
+		DPClog_ = params.etaC * SG * DPClog.at(x); 
 		//Function (7)
 		BP = exp2(BPlog.at(x));
 		DP = exp2(DPFlog_ + DPClog_);
 
 		/*--------------3.5. Tone compression---------------------*/
-		BPC = (BPCmax - BPCmin) * (log((BP - BPmin) / (BPmax - BPmin) + p_) - log(p_)) / (log(1 + p_) - log(p_)) + BPCmin;
+		BPC = (params.BPCmax - params.BPCmin) * (log((BP - BPmin) / (BPmax - BPmin) + p_) - log(p_)) / (log(1 + p_) - log(p_)) + params.BPCmin;
 		YC = BPC * DP;
 
 		/*----------------3.6. Color restoration------------------*/
@@ -107,9 +106,9 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 		double YIn;
 
 		Read_RGB_Comp(in, RIn, GIn, BIn, YIn, count, depth, flt, bigendian, false);
-		ROut = YC * pow(RIn / YIn, s / gamma);
-		GOut = YC * pow(GIn / YIn, s / gamma);
-		BOut = YC * pow(BIn / YIn, s / gamma);
+		ROut = YC * pow(RIn / YIn, params.s / gamma);
+		GOut = YC * pow(GIn / YIn, params.s / gamma);
+		BOut = YC * pow(BIn / YIn, params.s / gamma);
 
 		//Build histogram
 		//int r,g,b;

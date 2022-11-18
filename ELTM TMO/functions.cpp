@@ -1,5 +1,7 @@
 #include "functions.h"
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <cmath>
 
 vector<double> MeanFilter(const vector<double>& input, int width, int height, int radius)
 {
