@@ -50,12 +50,13 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 	DPFlog = Clip(Ylog - edgeAwareFilter(Ylog, w, h, params.rS, params.epsilonS), params.lamdaF);
 	BPFlog = Ylog - DPFlog;
 	//Delete Ylog
-	vector<double>().swap(Ylog);
+	Ylog.clear();
 
 	DPClog = Clip(BPFlog - edgeAwareFilter(BPFlog, w, h, rL, params.epsilonL), params.lamdaC);
 	BPlog = BPFlog - DPClog;
 	//Delete BPFlog
-	vector<double>().swap(BPFlog);
+	BPFlog.clear();
+
 
 	/*-----------3.3. Logarithm domain contrast reduction------------*/
 	maxBPlog = *max_element(BPlog.begin(), BPlog.end());
@@ -139,9 +140,10 @@ void eltm_tmo(FILE* in, int w, int h, int count, int depth, MEMORY* image_buffer
 
 	}
 	//Delete Ylog
-	vector<double>().swap(DPFlog);
-	vector<double>().swap(DPClog);
-	vector<double>().swap(BPlog);
+	DPFlog.clear();
+	DPClog.clear();
+	BPlog.clear();
+
 
 	fseek(in, pos, SEEK_SET);
 	auto stop = std::chrono::high_resolution_clock::now();

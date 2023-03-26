@@ -16,20 +16,23 @@ vector<double> edgeAwareFilter(const vector<double>& p, int width, int height, i
 
 	varI = corrI - (meanI * meanI);
 	//Delete corrI
-	vector<double>().swap(corrI);
+	corrI.clear();
+	
 
 	//Step 3&4:
 	a = varI / (varI + epsilon);
 	//Delete varI
-	vector<double>().swap(varI);
+	varI.clear();
+
 	meanA = MeanFilterMovingSum(a, width, height, radius);
 
 	meanB = MeanFilterMovingSum(meanI - (a * meanI), width, height, radius);
 
 	//Delete meanI
-	vector<double>().swap(meanI);
+	meanI.clear();
 	//Delete a
-	vector<double>().swap(a);
+	a.clear();
+
 	//Step 5:
 	q = (meanA * p) + meanB;
 
